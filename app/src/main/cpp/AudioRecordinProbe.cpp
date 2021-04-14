@@ -49,7 +49,8 @@ public:
         builder.setSharingMode(oboe::SharingMode::Shared);
         builder.setSampleRate(48000);
         builder.setAudioApi(oboe::AudioApi::OpenSLES);
-        // можно использовать libsndfile но мы просто запишем заголовок
+        // можно, и нужно наверное в реальном проекте использовать libsndfile но мы просто запишем заголовок
+        // кодом который уже много лет гуляет по интернету, например здесь -
         // https://www.cplusplus.com/forum/beginner/166954/
         std::ofstream f;
         //const char *path = "/storage/emulated/0/Music/record.wav";
