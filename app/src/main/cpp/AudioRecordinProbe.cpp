@@ -53,7 +53,7 @@ public:
         // кодом который уже много лет гуляет по интернету, например здесь -
         // https://www.cplusplus.com/forum/beginner/166954/
         std::ofstream f;
-        //const char *path = "/storage/emulated/0/Music/record.wav";
+
         const char *path = fPath;
         f.open(path, std::ios::binary);
         // Write the file headers
