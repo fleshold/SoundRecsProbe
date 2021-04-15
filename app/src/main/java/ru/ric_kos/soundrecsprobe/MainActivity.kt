@@ -15,14 +15,17 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    var fPath = ""
+    lateinit var btnStart: Button
+    lateinit var btnStop: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // Example of a call to a native method
         findViewById<TextView>(R.id.sample_text).text = stringFromJNI()
 
-        var btnStart = findViewById<Button>(R.id.btnStart)
-        var btnStop = findViewById<Button>(R.id.btnStop)
+         btnStart = findViewById<Button>(R.id.btnStart)
+         btnStop = findViewById<Button>(R.id.btnStop)
         btnStart.isEnabled = true
         btnStop.isEnabled = false
         checkALLPermissions()
@@ -37,17 +40,28 @@ class MainActivity : AppCompatActivity() {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale("ru")).format(Date())
 
 
-        val fPath = getExternalFilesDir(null).toString() + "/Recs/${timeStamp}_record.wav"
+        fPath = getExternalFilesDir(null).toString() + "/Recs/${timeStamp}_record.wav"
         btnStart.setOnClickListener{
-
+                threadStartRecord()
         }
         btnStop.setOnClickListener{
-
+            threadStopRecord()
         }
     }
 
+    private fun threadStopRecord() {
+        Thread(Runnable { stopRecording() }).start()
+        btnStart.isEnabled = true
+        btnStop.isEnabled = false
+    }
 
-
+    private fun threadStartRecord() {
+        Thread(Runnable {
+            startRecording(fPath)
+        }).start()
+        btnStart.isEnabled = false
+        btnStop.isEnabled = true
+    }
 
 
     fun checkALLPermissions(){
@@ -99,7 +113,7 @@ class MainActivity : AppCompatActivity() {
      */
     external fun stringFromJNI(): String
     external fun stopRecording(): Boolean
-    external fun startRecording(fullPathToFile: String): Boolean
+    external fun startRecording(fPathToFile: String): Boolean
     companion object {
         // Used to load the 'native-lib' library on application startup.
         init {
