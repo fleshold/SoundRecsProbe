@@ -18,6 +18,13 @@ class MainActivity : AppCompatActivity() {
     var fPath = ""
     lateinit var btnStart: Button
     lateinit var btnStop: Button
+    val RECORD_REQUEST = 11111
+    val ALL_PERMISSIONS = arrayOf(
+        Manifest.permission.RECORD_AUDIO,
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -65,25 +72,15 @@ class MainActivity : AppCompatActivity() {
 
 
     fun checkALLPermissions(){
-        val permissionW = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if (permissionW != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
-        }
-
-        val permissionR = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-        if (permissionR != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 2)
-        }
-        val permission = ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 3)
-        }
-
+        ActivityCompat.requestPermissions(this, ALL_PERMISSIONS, RECORD_REQUEST)
 
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
+        if (RECORD_REQUEST != requestCode) {
+            return
+        }
+    /*    when (requestCode) {
             1 -> {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
 
@@ -106,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
-        }
+        }*/
     }
     /**
      * A native method that is implemented by the 'native-lib' native library,
