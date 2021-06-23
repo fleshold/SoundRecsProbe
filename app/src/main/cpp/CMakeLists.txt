@@ -50,6 +50,7 @@ add_library(
         AudioRecordinProbe
         SHARED
         AudioRecordinProbe.cpp
+        RecordEngine.cpp
 )
 
 target_link_libraries( # Specifies the target library.
