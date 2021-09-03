@@ -13,6 +13,8 @@ import androidx.core.content.ContextCompat
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.activity.compose.setContent
+import ru.ric_kos.soundrecsprobe.ui.RecordPlayScreen
 
 class MainActivity : AppCompatActivity() {
     var fPath = ""
@@ -27,9 +29,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+      //  setContentView(R.layout.activity_main)
+    setContent {
+       RecordPlayScreen()
+    }
+
         // Example of a call to a native method
-        findViewById<TextView>(R.id.sample_text).text = stringFromJNI()
+     /*   findViewById<TextView>(R.id.sample_text).text = stringFromJNI()
 
          btnStart = findViewById<Button>(R.id.btnStart)
          btnStop = findViewById<Button>(R.id.btnStop)
@@ -53,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         }
         btnStop.setOnClickListener{
             threadStopRecord()
-        }
+        }*/
     }
 
     private fun threadStopRecord() {
