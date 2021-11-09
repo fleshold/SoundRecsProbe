@@ -18,8 +18,10 @@ import ru.ric_kos.soundrecsprobe.ui.RecordPlayScreen
 
 class MainActivity : AppCompatActivity() {
     var fPath = ""
+    var fPath1 = ""
     lateinit var btnStart: Button
     lateinit var btnStop: Button
+    lateinit var btnInfo: Button
     val RECORD_REQUEST = 11111
     val ALL_PERMISSIONS = arrayOf(
         Manifest.permission.RECORD_AUDIO,
@@ -29,18 +31,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      //  setContentView(R.layout.activity_main)
-    setContent {
-       RecordPlayScreen()
-    }
+        setContentView(R.layout.activity_main)
+   // setContent {
+   //    RecordPlayScreen()
+   // }
 
         // Example of a call to a native method
-     /*   findViewById<TextView>(R.id.sample_text).text = stringFromJNI()
+        findViewById<TextView>(R.id.sample_text).text = stringFromJNI()
 
          btnStart = findViewById<Button>(R.id.btnStart)
          btnStop = findViewById<Button>(R.id.btnStop)
         btnStart.isEnabled = true
         btnStop.isEnabled = false
+        btnInfo = findViewById<Button>(R.id.btnInfo)
         checkALLPermissions()
         val folder = File(getExternalFilesDir(null),"Recs")
         if (folder.exists()) {
@@ -54,12 +57,23 @@ class MainActivity : AppCompatActivity() {
 
 
         fPath = getExternalFilesDir(null).toString() + "/Recs/${timeStamp}_record.wav"
+        fPath1 = getExternalFilesDir(null).toString() + "/Recs/"
         btnStart.setOnClickListener{
                 threadStartRecord()
         }
+
         btnStop.setOnClickListener{
             threadStopRecord()
-        }*/
+
+        }
+        btnInfo.setOnClickListener{
+
+            val f = (folder);
+            val files: Array<File> = f.listFiles()!!
+            for (file in f.listFiles()!!) {
+                Log.e("RAN-W", file.toString())
+            }
+        }
     }
 
     private fun threadStopRecord() {

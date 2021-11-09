@@ -38,6 +38,17 @@
 
         app:layout_constraintLeft_toLeftOf="@id/btnStart"
         app:layout_constraintTop_toBottomOf="@id/btnStart" />
+    <Button
+        android:id="@+id/btnInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Info"
+
+        app:layout_constraintLeft_toLeftOf="@id/btnStop"
+        app:layout_constraintTop_toBottomOf="@id/btnStop" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
